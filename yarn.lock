@@ -5102,6 +5102,12 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^0.2.2"
 
+react-svg-spinner@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-svg-spinner/-/react-svg-spinner-0.1.0.tgz#1651865d13636c0d2172f55080829575dbe6ebd7"
+  dependencies:
+    webpack "^2.2.1"
+
 react-textarea-autosize@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/react-textarea-autosize/-/react-textarea-autosize-4.0.5.tgz#55379f6a6fa575fc87d1b8de2756e57e3b6c995d"
@@ -6400,7 +6406,7 @@ webpack-visualizer-plugin@^0.1.5:
     react "^0.14.0"
     react-dom "^0.14.0"
 
-webpack@^2.2.0:
+webpack@^2.2.0, webpack@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.2.1.tgz#7bb1d72ae2087dd1a4af526afec15eed17dda475"
   dependencies:
