@@ -44,6 +44,8 @@ export default class Await extends Component {
         () => this.setState({showLoading: true}),
         delay
       );
+    } else {
+      this.setState({showLoading: true});
     }
 
     if (timeout) {
