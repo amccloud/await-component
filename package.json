@@ -1,6 +1,6 @@
 {
   "name": "await-component",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "author": "Andrew McCloud",
   "main": "lib/index.js",
   "scripts": {
@@ -8,6 +8,9 @@
     "start": "NODE_ENV=production ./bin/node example/server.js",
     "build": "NODE_ENV=production babel src --out-dir lib"
   },
+  "files": [
+    "./lib"
+  ],
   "dependencies": {
     "axios": "^0.15.3",
     "babel-core": "^6.18.2",
