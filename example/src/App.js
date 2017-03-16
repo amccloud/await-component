@@ -5,14 +5,16 @@ import Spinner from 'react-svg-spinner';
 import {Async, Await} from 'await-component';
 import {delay} from './utils';
 
-const Container = import('./Container').then(delay(2000));
-const Sum = import('./Sum');
+// Delays added to mimic network latency
+const Container = import('./Container').then(delay(1000));
+const Sum = import('./Sum').then(delay(3000));
 
 export default () => (
   <Await
-    loading={<Spinner size={50} thickness={1} />}
+    loading={<Spinner size="50" thickness={1} />}
     error={<div>ERROR!</div>}>
     <Container>
+      <div>Sums:</div>
       <Sum a={1} b={2} />
       <Sum a={2} b={2} />
       <Sum a={5} b={5} />

@@ -1,5 +1,5 @@
 import {Component, PropTypes} from 'react';
-import reactTreeWalker from 'react-tree-walker';
+import reactTreeWalker from './reactTreeWalker';
 
 export default class Await extends Component {
   static propTypes = {
