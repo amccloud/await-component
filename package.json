@@ -1,6 +1,6 @@
 {
   "name": "await-component",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0-alpha.2",
   "author": "Andrew McCloud",
   "main": "lib/index.js",
   "scripts": {
