@@ -67,4 +67,4 @@ See the [Contributors Guide](/CONTRIBUTING.md)
 
 ## License
 
-[MIT](/LICENSE.md)
+[MIT](/LICENSE)
