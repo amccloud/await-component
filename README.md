@@ -11,7 +11,7 @@ yarn add await-component
 ```
 
 ```js
-import {Await, Async} from 'await-component';
+import {Await, Async, preload} from 'await-component';
 ```
 
 ## Examples
@@ -36,7 +36,28 @@ export default () => (
 );
 ```
 
-### Using JSX Pragma
+### Preloading
+```js
+import React from 'react';
+import {Await, Async, preload} from 'await-component';
+
+const Container = Async(() => import('./Container'));
+const Sum = Async(() => import('./Sum'));
+
+preload(Container);
+
+export default () => (
+  <Await loading={<div>Loading...</div>} error={<div>ERROR!</div>}>
+    <Container>
+      <Sum a={1} b={2} />
+      <Sum a={2} b={2} />
+      <Sum a={5} b={5} />
+    </Container>
+  </Await>
+);
+```
+
+### Using JSX Pragma (experimental)
 
 ```js
 /* @jsx Async.createElement */
