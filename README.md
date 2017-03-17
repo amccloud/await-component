@@ -16,7 +16,7 @@ import {Await, Async} from 'await-component';
 
 ## Examples
 
-### Using Async(() => <Promise>)
+### Using `Async(() => <Promise>)`
 
 ```js
 import React from 'react';
