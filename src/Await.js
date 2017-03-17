@@ -1,5 +1,5 @@
-import {Component, PropTypes} from 'react';
-import reactTreeWalker from './reactTreeWalker';
+import { Component, PropTypes } from "react";
+import reactTreeWalker from "./reactTreeWalker";
 
 export default class Await extends Component {
   static propTypes = {
@@ -15,42 +15,49 @@ export default class Await extends Component {
   };
 
   state = {
-    loading: true,
-    showLoading: false
+    showError: false,
+    showLoading: false,
+    showChildren: false
   };
 
   async componentWillMount() {
-    const {children} = this.props;
+    const { children } = this.props;
     const pending = [];
     const elements = Array.isArray(children) ? children : [children];
-    const walking = elements.map(
-      element => reactTreeWalker(element, () => true, {
-        await: pending
-      })
-    );
+    const walking = elements.map(element =>
+      reactTreeWalker(element, element => {
+        if (!element.type || !element.type.load) return;
+        pending.push(element.type.load());
+      }));
 
     await Promise.all(walking);
-    await Promise.all(pending);
 
-    this.clearTimeouts();
-    this.setState({loading: false});
+    try {
+      await Promise.all(pending);
+      this.setState({ showChildren: true });
+    } catch (error) {
+      this.setState({ showError: true });
+      throw error;
+    } finally {
+      this.clearTimeouts();
+    }
   }
 
   componentDidMount() {
-    const {delay, timeout} = this.props;
+    const { delay, timeout } = this.props;
 
     if (delay) {
       this.showLoadingTimeout = setTimeout(
-        () => this.setState({showLoading: true}),
+        () => this.setState({ showLoading: true }),
         delay
       );
     } else {
-      this.setState({showLoading: true});
+      this.setState({ showLoading: true });
     }
 
     if (timeout) {
       this.showErrorTimeout = setTimeout(
-        () => this.setState({showError: true}),
+        () => this.setState({ showError: true }),
         timeout
       );
     }
@@ -67,7 +74,8 @@ export default class Await extends Component {
 
   render() {
     if (this.state.showError) return this.props.error;
-    if (this.state.showLoading && this.state.loading) return this.props.loading;
-    return this.props.children;
+    if (this.state.showChildren) return this.props.children;
+    if (this.state.showLoading) return this.props.loading;
+    return null;
   }
 }

@@ -1,11 +1,13 @@
 {
+  "plugins": ["fast-async", "syntax-dynamic-import", "transform-class-properties"],
   "presets": [
     "react",
     ["env", {
+      "exclude": ["transform-regenerator"],
       "targets": {
+        "browsers": ["last 2 versions"],
         "node": "current"
       }
-    }],
-    "stage-0"
+    }]
   ]
 }

@@ -1,7 +1,6 @@
 /* eslint-env node */
-import {resolve} from 'path';
-import webpack from 'webpack';
-import VisualizerPlugin from 'webpack-visualizer-plugin';
+import { resolve } from "path";
+import webpack from "webpack";
 
 function env(env, enabled = true, disabled) {
   if (disabled === undefined) {
@@ -11,66 +10,49 @@ function env(env, enabled = true, disabled) {
   return process.env.NODE_ENV === env ? enabled : disabled;
 }
 
-const commonEntry = [
-  'regenerator-runtime/runtime',
-  ...env('development', ['webpack-hot-middleware/client'])
-];
-
 export default {
-  devtool: env('development', 'eval', 'source-map'),
+  devtool: env("development", "eval", "source-map"),
   entry: {
-    example: [...commonEntry, './example/src/main']
+    example: [
+      ...env("development", ["webpack-hot-middleware/client"]),
+      "./example/src/main"
+    ]
   },
   output: {
-    path: resolve('./dist/example'),
-    publicPath: '/',
-    filename: '[name].js'
+    path: resolve("./dist/example"),
+    publicPath: "/",
+    filename: "[name].js"
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        include: [resolve('src'), /await-component/],
+        loader: "babel-loader",
+        include: [resolve("src"), /await-component/],
         query: {
-          cacheDirectory: true,
-          babelrc: false,
-          presets: [
-            'react',
-            [
-              'env',
-              {
-                modules: false,
-                targets: {
-                  browsers: ['last 2 versions']
-                }
-              }
-            ],
-            'stage-0'
-          ]
+          cacheDirectory: true
         }
       }
     ]
   },
   resolve: {
-    modules: [resolve('./example/src'), resolve('./node_modules')],
+    modules: [resolve("./example/src"), resolve("./node_modules")],
     alias: {
-      'await-component': resolve('./src')
+      "await-component": resolve("./src")
     }
   },
   plugins: [
-    new VisualizerPlugin(),
     new webpack.DefinePlugin({
-      'process.env': {
+      "process.env": {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    ...env('development', [
+    ...env("development", [
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     ]),
-    ...env('production', [
+    ...env("production", [
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: true
       })

@@ -1,2 +1,4 @@
-export Async from './Async';
-export Await from './Await';
+import Async from "./Async";
+import Await from "./Await";
+
+export { Async, Await };
