@@ -1,6 +1,6 @@
 /* eslint-env node */
-import { resolve } from "path";
-import webpack from "webpack";
+import {resolve} from 'path';
+import webpack from 'webpack';
 
 function env(env, enabled = true, disabled) {
   if (disabled === undefined) {
@@ -11,24 +11,24 @@ function env(env, enabled = true, disabled) {
 }
 
 export default {
-  devtool: env("development", "eval", "source-map"),
+  devtool: env('development', 'eval', 'source-map'),
   entry: {
     example: [
-      ...env("development", ["webpack-hot-middleware/client"]),
-      "./example/src/main"
+      ...env('development', ['webpack-hot-middleware/client']),
+      './example/src/main'
     ]
   },
   output: {
-    path: resolve("./dist/example"),
-    publicPath: "/",
-    filename: "[name].js"
+    path: resolve('./dist/example'),
+    publicPath: '/',
+    filename: '[name].js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        include: [resolve("src"), /await-component/],
+        loader: 'babel-loader',
+        include: [resolve('src'), /await-component/],
         query: {
           cacheDirectory: true
         }
@@ -36,23 +36,23 @@ export default {
     ]
   },
   resolve: {
-    modules: [resolve("./example/src"), resolve("./node_modules")],
+    modules: [resolve('./example/src'), resolve('./node_modules')],
     alias: {
-      "await-component": resolve("./src")
+      'await-component': resolve('./src')
     }
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
+      'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    ...env("development", [
+    ...env('development', [
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
     ]),
-    ...env("production", [
+    ...env('production', [
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: true
       })

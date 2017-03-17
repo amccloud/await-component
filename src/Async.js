@@ -1,4 +1,4 @@
-import React, { createElement } from "react";
+import React, {createElement} from 'react';
 
 const moduleInterop = module => {
   return module && module.__esModule ? module.default : module;
@@ -20,7 +20,7 @@ const Async = getType => {
 };
 
 Async.createElement = (type, config, ...children) => {
-  if (typeof type.then === "function") {
+  if (typeof type.then === 'function') {
     return createElement(Async(() => type), config, ...children);
   }
 

@@ -1,5 +1,5 @@
-import { Component, PropTypes } from "react";
-import reactTreeWalker from "./reactTreeWalker";
+import {Component, PropTypes} from 'react';
+import reactTreeWalker from './reactTreeWalker';
 
 export default class Await extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ export default class Await extends Component {
   };
 
   async componentWillMount() {
-    const { children } = this.props;
+    const {children} = this.props;
     const pending = [];
     const elements = Array.isArray(children) ? children : [children];
     const walking = elements.map(element =>
@@ -34,9 +34,9 @@ export default class Await extends Component {
 
     try {
       await Promise.all(pending);
-      this.setState({ showChildren: true });
+      this.setState({showChildren: true});
     } catch (error) {
-      this.setState({ showError: true });
+      this.setState({showError: true});
       throw error;
     } finally {
       this.clearTimeouts();
@@ -44,20 +44,20 @@ export default class Await extends Component {
   }
 
   componentDidMount() {
-    const { delay, timeout } = this.props;
+    const {delay, timeout} = this.props;
 
     if (delay) {
       this.showLoadingTimeout = setTimeout(
-        () => this.setState({ showLoading: true }),
+        () => this.setState({showLoading: true}),
         delay
       );
     } else {
-      this.setState({ showLoading: true });
+      this.setState({showLoading: true});
     }
 
     if (timeout) {
       this.showErrorTimeout = setTimeout(
-        () => this.setState({ showError: true }),
+        () => this.setState({showError: true}),
         timeout
       );
     }

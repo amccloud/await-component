@@ -12,7 +12,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write",
+      "prettier --write --single-quote --no-bracket-spacing --jsx-bracket-same-line",
       "git add"
     ]
   },
