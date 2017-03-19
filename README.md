@@ -4,6 +4,14 @@
 
 Code-splitting with import() and loading boundaries
 
+## Features
+
+- Supports any Promise based code-splitting API `import()`, `require.ensure()`, etc
+- Display a custom loading component while waiting for sub-components to load.
+- Handle timeouts and errors with a custom error component.
+- Adds delay to prevent [Flash of Loading Content](https://github.com/tc39/proposal-dynamic-import/issues/41)
+- Preload components with `preload`
+
 ## Install
 
 ```sh
