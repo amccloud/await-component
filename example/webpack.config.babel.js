@@ -51,11 +51,6 @@ export default {
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NoEmitOnErrorsPlugin()
-    ]),
-    ...env('production', [
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true
-      })
     ])
   ]
 };

@@ -6,8 +6,14 @@
       "exclude": ["transform-regenerator"],
       "targets": {
         "browsers": ["last 2 versions"],
-        "node": 7
+        "node": 7,
+        "uglify": true
       }
     }]
-  ]
+  ],
+  "env": {
+    "production": {
+      "presets": ["babili"]
+    }
+  }
 }
